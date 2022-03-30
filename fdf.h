@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/03/26 21:41:06 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/03/30 12:23:54 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 typedef struct s_fdf
 {
+	char	**map;
+	int		fd;
 	int		pixel;
 	int		len;
 	int		bpp;

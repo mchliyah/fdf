@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/03/26 21:33:28 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/03/30 12:27:34 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,28 @@ void	pixel_put(t_fdf *fdf)
 	*(unsigned int *)dst = RED;
 }
 
+char **get_map(int fd)
+{
+	char **map;	
+}
+
 int	main(int ac, char **av)
 {
 	t_fdf	fdf;
 	int		i;
 
-	if (ac && av)
+	if (ac < 2)
+	{
+		write(2,"ERROR numbre of argument \n", 26);
+		return (0);			
+	}
+	fdf.fd = open(av[1], O_RDONLY);
+	if (fdf.fd < 0)
+	{
+		write(2, "ERROR map \n", 11);
+		return (1);
+	}
+	fdf.map = get_map(fd);
 	i = 5;
 	fdf.x = 5;
 	fdf.y = 5;
