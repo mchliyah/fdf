@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 12:33:10 by mchliyah          #+#    #+#              #
-#    Updated: 2022/03/25 19:40:53 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/03/30 20:36:01 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,20 +54,17 @@ FILES= 					\
 	./ft_strtrim.c		\
 	./ft_substr.c		\
 	./ft_tolower.c		\
-	./ft_toupper.c
-
-FBONUS = 				\
-	./ft_lstadd_back_bonus.c	\
-	./ft_lstadd_front_bonus.c	\
-	./ft_lstclear_bonus.c		\
-	./ft_lstdelone_bonus.c		\
-	./ft_lstiter_bonus.c		\
-	./ft_lstlast_bonus.c		\
-	./ft_lstnew_bonus.c			\
-	./ft_lstsize_bonus.c		
+	./ft_toupper.c		\
+	./ft_lstadd_back.c	\
+	./ft_lstadd_front.c	\
+	./ft_lstclear.c		\
+	./ft_lstdelone.c	\
+	./ft_lstiter.c		\
+	./ft_lstlast.c		\
+	./ft_lstnew.c		\
+	./ft_lstsize.c		
 
 OBJECTS = $(subst .c,.o,$(FILES))
-BONUOBJ = $(subst .c,.o,$(FBONUS))
 
 C_RED = \033[1;31m
 C_GREEN = \033[1;32m
@@ -82,21 +79,12 @@ $(NAME) :  $(OBJECTS)
 	@echo "$(C_GREEN)[LIBFT CREATED!]$(C_RES)"
 
 clean : 
-	$(RM) $(OBJECTS) $(BONUOBJ)
+	$(RM) $(OBJECTS)
 	@echo "$(C_RED)[LIBFT OBJECTS DELETED!]$(C_RES)"
 
 fclean : clean
 	$(RM) $(NAME)
 	@echo "$(C_RED)[LIBFT.A DELTED!]$(C_RES)"
-
-bonus : $(BONUOBJ)
-
-$(BONUOBJ) : $(FBONUS)
-	$(CC) $(CFLAG) $(FBONUS)
-	$(AR) $(NAME) $(BONUOBJ)
-	@echo "$(C_BLUE)[LIBFT BONUS CREATED!]$(C_RES)"
 	
 re : fclean all
-
-rebonus : fclean bonus
 

@@ -6,19 +6,22 @@
 #    By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 01:07:10 by mchliyah          #+#    #+#              #
-#    Updated: 2022/03/25 20:00:07 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/03/30 21:10:26 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-#BONUS = pipex_bonus
+#BONUS = 
 CC = gcc
 FLAGS =  -Wall -Werror -Wextra -c
 
 RM = rm -f
 
 FILES = \
-		fdf.c
+		fdf.c	\
+		./libft/ft_lstnew.c\
+		get_next_line.c	\
+		get_next_line_utils.c\
 
 OBJECTS = $(FILES:.c=.o)
 
@@ -47,7 +50,7 @@ all : $(NAME)
 
 $(NAME) :  $(OBJECTS)
 	@$(ALLIBFT)
-	@$(CC) $(FILES) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) $(OBJECTS) $(ARLIB) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	@echo "$(C_GREEN)[FDF MANDATORY CREATED!]$(C_RES)"
 
 #bonus : $(BONUS)

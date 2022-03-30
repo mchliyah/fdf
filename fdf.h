@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/03/30 12:23:54 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/03/30 22:55:10 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define FDF_H
 
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 # include <mlx.h>
+# include <math.h>
 # include "get_next_line.h"
 # include "./libft/libft.h"
 
@@ -24,7 +28,7 @@
 
 typedef struct s_fdf
 {
-	char	**map;
+	t_list	*map;
 	int		fd;
 	int		pixel;
 	int		len;
