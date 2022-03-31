@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:58:20 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/02/10 20:44:28 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/03/31 17:16:20 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,20 +88,3 @@ char	**ft_split(char const *s, char c)
 	wloop(s, c, str);
 	return (str);
 }
-/*
-#include <stdio.h>
-int main()
-{
-	char *s="123.123.123.123...";
-	char c = '.';
-
-	char **ptr;
-	ptr = ft_split(s, c);
-	int i = 0;
-	while(ptr[i])
-	{
-		printf("'%s'\n",ptr[i]);
-		i++;
-	}
-}
-*/

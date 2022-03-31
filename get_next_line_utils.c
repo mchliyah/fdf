@@ -6,13 +6,23 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:06:53 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/03/30 21:05:52 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/03/31 22:28:16 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_getstrdup(const char *src)
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strdup1(const char *src)
 {
 	char	*p;
 	int		i;
@@ -40,7 +50,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (len > ft_strlen((char *)s))
 		len = ft_strlen((char *)s) - start;
 	if (start > ft_strlen((char *)s))
-		return (ft_getstrdup(""));
+		return (ft_strdup1(""));
 	ret = (char *) malloc (sizeof (char) * len + 1);
 	if (!ret)
 		return (0);
@@ -53,4 +63,31 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	ret[i] = '\0';
 	return (ret);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	dest = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dest)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	while (*s2 != '\0')
+	{
+		dest[i] = *s2;
+		i++;
+		s2++;
+	}
+	dest[i] = '\0';
+	free((char *)s1);
+	return (dest);
 }

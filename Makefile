@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 01:07:10 by mchliyah          #+#    #+#              #
-#    Updated: 2022/03/30 21:10:26 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/03/31 21:48:38 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ all : $(NAME)
 
 $(NAME) :  $(OBJECTS)
 	@$(ALLIBFT)
-	@$(CC) $(OBJECTS) $(ARLIB) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) $(OBJECTS) $(ARLIB) -lmlx -framework OpenGL -framework AppKit -o $(NAME) #-fsanitize=address
 	@echo "$(C_GREEN)[FDF MANDATORY CREATED!]$(C_RES)"
 
 #bonus : $(BONUS)

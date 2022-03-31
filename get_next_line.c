@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 14:45:53 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/03/30 21:05:48 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/03/31 22:27:31 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ char	*get_next_line(int fd)
 	int			read_return;
 
 	read_return = 0;
-	if (fd < 0 || 1 <= 0)
+	if (fd < 0)
 		return (NULL);
 	if (!storage)
 	{
-		storage = ft_getstrdup("");
+		storage = ft_strdup1("");
 		if (!storage)
 			return (NULL);
 	}
-	rest = malloc(sizeof(char) * 2);
+	rest = malloc(sizeof(char) * (2));
 	storage = full_static(storage, rest, fd, read_return);
 	free (rest);
 	if (strsearch(storage, '\n') == -1)
