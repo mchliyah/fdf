@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/03/31 21:00:14 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/01 17:00:10 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ typedef struct s_fdf
 	void	*img;
 	char	*img_adrs;
 }	t_fdf;
+
+int		**get_map(t_fdf *fdf, char **av);
 
 #endif

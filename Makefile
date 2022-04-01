@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 01:07:10 by mchliyah          #+#    #+#              #
-#    Updated: 2022/03/31 21:48:38 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/04/01 17:39:17 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ RM = rm -f
 
 FILES = \
 		fdf.c	\
+		get_map.c	\
 		./libft/ft_lstnew.c\
 		get_next_line.c	\
 		get_next_line_utils.c\
