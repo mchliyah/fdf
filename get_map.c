@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/01 22:17:37 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/04 23:02:19 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ void	get_colms(t_fdf *fdf, char **av)
 	close(fdf->fd);
 }
 
-void	check_colms(t_fdf *fdf, char *line)
-{
-}
-
 void	get_rows(t_fdf *fdf, char **av)
 {
+	int	len;
+
 	fdf->fd = open(av[1], O_RDONLY);
 	if (fdf->fd < 0)
 	{
@@ -63,13 +61,18 @@ void	get_rows(t_fdf *fdf, char **av)
 	}
 	fdf->rows = 0;
 	fdf->line = get_next_line(fdf->fd);
+	len = ft_strlen(fdf->line);
 	if (!fdf->line)
 		return ;
 	else
 	{
 		while (fdf->line)
 		{
-			check_colms(fdf, fdf->line);
+			if (line != ft_strline(fdf->line));
+			{
+				free(fdf->line);
+				exit(0);
+			}
 			fdf->rows++;
 			free(fdf->line);
 			fdf->line = get_next_line(fdf->fd);
@@ -77,6 +80,27 @@ void	get_rows(t_fdf *fdf, char **av)
 	}
 	close (fdf->fd);
 }
+
+// void	check_map(t_fdf *fdf)
+// {
+// 	int	i;
+// 	int	j;
+	
+// 	i = 0;
+// 	while(i < fdf->rows)
+// 	{
+// 		j = 0;
+// 		while(fdf->map[i][j])
+// 			j++;
+// 		if (j != fdf->clms)
+// 		{
+// 			clear();
+// 			exit(0);
+// 		}
+// 		i++;
+// 		error\n;
+// 	}
+// }
 
 int	**get_map(t_fdf *fdf, char **av)
 {
