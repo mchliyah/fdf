@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/01 17:00:10 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:54:24 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,35 @@
 
 typedef struct s_fdf
 {
-	char	*line;
 	int		**map;
-	int		rows;
-	int		clms;
-	int		fd;
-	int		pixel;
-	int		len;
-	int		bpp;
-	int		endian;
-	int		ofset;
-	int		x;
-	int		y;
-	int		i;
-	int		j;
 	void	*mlx;
 	void	*win;
 	void	*img;
 	char	*img_adrs;
+	char	*line;
+	int		rows;
+	int		clms;
+	int		fd;
+	int		len;
+	int		pixel;
+	int		bpp;
+	int		endian;
+	int		ofset;
+	int		x0;
+	int		y0;
+	int		x;
+	int		y;
+	float	xinc;
+	float	yinc;
+	int		dx;
+	int		dy;
+	float	stp;
+	int		h;
+	int		i;
+	int		j;
 }	t_fdf;
 
 int		**get_map(t_fdf *fdf, char **av);
+void    err_exit(char *err);
 
 #endif

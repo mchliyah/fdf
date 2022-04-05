@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 01:07:10 by mchliyah          #+#    #+#              #
-#    Updated: 2022/04/01 17:39:17 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/04/05 19:56:21 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES = \
 		./libft/ft_lstnew.c\
 		get_next_line.c	\
 		get_next_line_utils.c\
+		Error.c	\
 
 OBJECTS = $(FILES:.c=.o)
 
