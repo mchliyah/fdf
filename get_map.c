@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/05 19:55:50 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/06 01:55:08 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	**get_map(t_fdf *fdf, char **av)
 {
 	get_rows(fdf, av);
 	fdf->map = malloc(sizeof(int *) * fdf->rows);
+	if (!fdf->map)
+		err_exit("malloc");
 	get_colms(fdf, av);
 	return (fdf->map);
 }

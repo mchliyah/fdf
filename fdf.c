@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/05 20:09:17 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/06 02:41:36 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ void	drwline(t_fdf *fdf)
 	k = 0;
 	fdf->dx = fdf->x - fdf->x0;
 	fdf->dy = fdf->y - fdf->y0;
-	if (fdf->dx < fdf->dy)
-		fdf->stp = fdf->dx;
+	if (abs(fdf->dx) >= abs(fdf->dy))
+		fdf->stp = abs(fdf->dx);
 	else
-		fdf->stp = fdf->dy;
-	fdf->xinc = fdf->dx / (float)fdf->stp;
-	fdf->yinc = fdf->dy / (float)fdf->stp;
+		fdf->stp = abs(fdf->dy);
+	fdf->xinc = fdf->dx / fdf->stp;
+	fdf->yinc = fdf->dy / fdf->stp;
 	fdf->x = fdf->x0;
 	fdf->y = fdf->y0;
 	while(k <= fdf->stp)
 	{
 		pixel_put(fdf);
-		fdf->x += (int)round(fdf->xinc);
-		fdf->y += (int)round(fdf->yinc);
+		fdf->x += (fdf->xinc);
+		fdf->y += (fdf->yinc);
 		k++;
 	}
 
@@ -49,10 +49,10 @@ void	start(t_fdf *fdf)
 {
 	if (fdf->i == 0)
 	{
-		fdf->x0 = 100;
-		fdf->y0 = 100;
-		fdf->x = 12;
-		fdf->y = 100;
+		fdf->x0 = 500;
+		fdf->y0 = 300;
+		fdf->x = 700;
+		fdf->y = 200;
 	}
 }
 
