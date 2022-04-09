@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/06 01:55:08 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/09 02:45:48 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	get_rows(t_fdf *fdf, char **av)
 	{
 		while (fdf->line)
 		{
-			if (len != ft_strlen(fdf->line))
-			{
-				free(fdf->line);
-				exit(0);
-			}
+		// 	if (len != ft_strlen(fdf->line))
+		// 	{
+		// 		free(fdf->line);
+		// 		exit(0);
+		// 	}
 			fdf->rows++;
 			free(fdf->line);
 			fdf->line = get_next_line(fdf->fd);
