@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/09 03:21:08 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/09 08:50:54 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	start(t_fdf *fdf)
 {
 	if (fdf->i == 0)
 	{
-		fdf->x0 = 100;
-		fdf->y0 = 200;
-		fdf->x = 100;
-		fdf->y = 200;
+		fdf->x0 = 60;
+		fdf->y0 = 60;
+		fdf->x = 60;
+		fdf->y = 60;
 	}
 }
 
@@ -73,15 +73,15 @@ void	render(t_fdf *fdf)
 			fdf->y = fdf->y0;
 			if (fdf->j != fdf->clms - 1)
 			{
-				fdf->x = fdf->x0 + 50;
+				fdf->x = fdf->x0 + 10;
 				drwline(fdf);
 			}
-			fdf->x0 = fdf->x0 + 50;
+			fdf->x0 = fdf->x0 + 10;
 			fdf->j++;
 		}
-		fdf->y0 = fdf->y0 + 50;
-		fdf->x0 = 100;
-		fdf->x = 100;
+		fdf->y0 = fdf->y0 + 10;
+		fdf->x0 = 60;
+		fdf->x = 60;
 		fdf->i++;
 	}
 }
@@ -94,8 +94,8 @@ int	main(int ac, char **av)
 		return (ft_putstr_fd("ERROR numbre of argument \n", 2));
 	get_map(&fdf, av);
 	fdf.mlx = mlx_init();
-	fdf.win = mlx_new_window(fdf.mlx, 1080, 720, "FDF");
-	fdf.img = mlx_new_image(fdf.mlx, 1080, 720);
+	fdf.win = mlx_new_window(fdf.mlx, 1920, 1080, "FDF");
+	fdf.img = mlx_new_image(fdf.mlx, 1920, 1080);
 	fdf.img_adrs = mlx_get_data_addr(fdf.img, &fdf.bpp, &fdf.len, &fdf.endian);
 	fdf.ofset = (fdf.y * fdf.len + fdf.x * (fdf.bpp / 8));
 	start(&fdf);
