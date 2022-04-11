@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/10 18:51:45 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/11 02:13:04 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_fdf
 	float	yinc;
 	int		dx;
 	int		dy;
-	float	stp;
+	int		stp;
 	int		h;
 	int		i;
 	int		j;

@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/11 01:02:57 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/11 02:32:56 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,42 +56,44 @@ void	init(t_fdf *fdf)
 {
 	if (fdf->i == 0)
 	{
-		fdf->x0 = 600;
+		fdf->x0 = 500;
 		fdf->y0 = 10;
-		fdf->x = 600;
+		fdf->x = 500;
 		fdf->y = 10;
 	}
 	else 
 	{
 		fdf->y0 = fdf->y0 + 11;
-		fdf->x0 = 600;
-		fdf->x = 600;
+		fdf->x0 = 500;
+		fdf->x = 500;
 	}
 }
 
 void	drwline(t_fdf *fdf)
 {
 	int k;
-	int i;
 
 	k = 0;
-	i = 0;
 	get_iso(fdf);
+	// fdf->xiso = fdf->x;
+	// fdf->xiso0 = fdf->x0;
+	// fdf->yiso = fdf->y;
+	// fdf->yiso0 = fdf->y0;
 	fdf->dx = fdf->xiso - fdf->xiso0;
 	fdf->dy = fdf->yiso - fdf->yiso0;
-	if (abs(fdf->dx) >= abs(fdf->dy))
+	if (abs(fdf->dx) > abs(fdf->dy))
 		fdf->stp = abs(fdf->dx);
 	else
 		fdf->stp = abs(fdf->dy);
-	fdf->xinc = fdf->dx / fdf->stp;
-	fdf->yinc = fdf->dy / fdf->stp;
+	fdf->xinc = (float)fdf->dx / (float)fdf->stp;
+	fdf->yinc = (float)fdf->dy / (float)fdf->stp;
 	fdf->xiso = fdf->xiso0;
 	fdf->yiso = fdf->yiso0;
 	while(k <= fdf->stp)
 	{
 		pixel_put(fdf);
-		fdf->xiso += (fdf->xinc);
-		fdf->yiso += (fdf->yinc);
+		fdf->xiso += round(fdf->xinc);
+		fdf->yiso += round(fdf->yinc);
 		k++;
 	}
 }
