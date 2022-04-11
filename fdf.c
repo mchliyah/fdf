@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/11 00:25:15 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/11 01:02:57 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	pixel_put(t_fdf *fdf)
 {
 	char	*dst;
 
-	dst = fdf->img_adrs + (fdf->y * fdf->len + fdf->x * (fdf->bpp / 8));
+	dst = fdf->img_adrs + (fdf->yiso * fdf->len + fdf->xiso * (fdf->bpp / 8));
 	*(unsigned int *)dst = RED;
 }
 
@@ -40,15 +40,17 @@ void	pixel_put(t_fdf *fdf)
 // 	}
 // }
 
-// void get_iso(t_fdf *fdf)
-// {
-// 	fdf->xiso = fdf->x * cos(0.5) + fdf->y * sin(0.5);
-// 	fdf->yiso = fdf->x * cos(0.5) - fdf->y * sin(0.5) - fdf->h;
-// 	fdf->xiso = fdf->x - fdf->y;
-// 	fdf->yiso = (fdf->x + fdf->y) / 2 - fdf->h;
-// 	fdf->xiso0 = fdf->x0 - fdf->y0;
-// 	fdf->yiso0 = (fdf->x0 + fdf->y0) / 2 - fdf->h;
-// }
+void get_iso(t_fdf *fdf)
+{
+	// fdf->xiso = fdf->x * cos(0.5) + fdf->y * sin(0.5);
+	// fdf->yiso = fdf->x * cos(0.5) - fdf->y * sin(0.5) - fdf->h;
+	// fdf->xiso0 = fdf->x0 * cos(0.5) + fdf->y0 * sin(0.5);
+	// fdf->yiso0 = fdf->x0 * cos(0.5) - fdf->y0 * sin(0.5) - fdf->h;
+	fdf->xiso = fdf->x - fdf->y;
+	fdf->yiso = (fdf->x + fdf->y) / 2 - fdf->h;
+	fdf->xiso0 = fdf->x0 - fdf->y0;
+	fdf->yiso0 = (fdf->x0 + fdf->y0) / 2 - fdf->h;
+}
 
 void	init(t_fdf *fdf)
 {
@@ -61,7 +63,7 @@ void	init(t_fdf *fdf)
 	}
 	else 
 	{
-		fdf->y0 = fdf->y0 + 50;
+		fdf->y0 = fdf->y0 + 11;
 		fdf->x0 = 600;
 		fdf->x = 600;
 	}
@@ -74,22 +76,22 @@ void	drwline(t_fdf *fdf)
 
 	k = 0;
 	i = 0;
-	// get_iso(fdf);
-	fdf->dx = fdf->x - fdf->x0;
-	fdf->dy = fdf->y - fdf->y0;
+	get_iso(fdf);
+	fdf->dx = fdf->xiso - fdf->xiso0;
+	fdf->dy = fdf->yiso - fdf->yiso0;
 	if (abs(fdf->dx) >= abs(fdf->dy))
 		fdf->stp = abs(fdf->dx);
 	else
 		fdf->stp = abs(fdf->dy);
 	fdf->xinc = fdf->dx / fdf->stp;
 	fdf->yinc = fdf->dy / fdf->stp;
-	fdf->x = fdf->x0;
-	fdf->y = fdf->y0;
+	fdf->xiso = fdf->xiso0;
+	fdf->yiso = fdf->yiso0;
 	while(k <= fdf->stp)
 	{
 		pixel_put(fdf);
-		fdf->x += (fdf->xinc);
-		fdf->y += (fdf->yinc);
+		fdf->xiso += (fdf->xinc);
+		fdf->yiso += (fdf->yinc);
 		k++;
 	}
 }
@@ -106,16 +108,16 @@ void	render(t_fdf *fdf)
 			fdf->h = fdf->map[fdf->i][fdf->j];
 			if (fdf->i != fdf->rows - 1)
 			{
-				fdf->y = fdf->y0 + 50;
+				fdf->y = fdf->y0 + 11;
 				drwline(fdf);
 			}
 			fdf->y = fdf->y0;
 			if (fdf->j != fdf->clms - 1)
 			{
-				fdf->x = fdf->x0 + 50;
+				fdf->x = fdf->x0 + 11;
 				drwline(fdf);
 			}
-			fdf->x0 = fdf->x0 + 50;
+			fdf->x0 = fdf->x0 + 11;
 			fdf->j++;
 		}
 		fdf->i++;
