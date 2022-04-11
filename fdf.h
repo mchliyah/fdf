@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/11 02:13:04 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/11 02:55:21 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ typedef struct s_fdf
 	int		dx;
 	int		dy;
 	int		stp;
-	int		h;
+	int		z;
+	int		z0;
 	int		i;
 	int		j;
 	int		xiso;
