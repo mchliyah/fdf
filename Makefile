@@ -6,7 +6,7 @@
 #    By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 01:07:10 by mchliyah          #+#    #+#              #
-#    Updated: 2022/04/10 18:05:40 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/04/12 00:15:20 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,15 @@ FLAGS =  -Wall -Werror -Wextra -c
 RM = rm -f
 
 FILES = \
+		start_init.c	\
 		fdf.c	\
 		get_map.c	\
 		./libft/ft_lstnew.c\
 		get_next_line.c	\
 		get_next_line_utils.c\
-		Error.c	\
+		Error.c		\
+		render.c	\
+		free.c		\
 
 OBJECTS = $(FILES:.c=.o)
 

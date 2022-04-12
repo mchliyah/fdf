@@ -6,21 +6,11 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/09 02:45:48 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/12 00:14:12 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"fdf.h"
-
-void	to_free(char **colm)
-{
-	int	i;
-
-	i = -1;
-	while (colm[++i])
-		free(colm[i]);
-	free(colm);
-}
 
 void	get_colms(t_fdf *fdf, char **av)
 {
@@ -67,11 +57,6 @@ void	get_rows(t_fdf *fdf, char **av)
 	{
 		while (fdf->line)
 		{
-		// 	if (len != ft_strlen(fdf->line))
-		// 	{
-		// 		free(fdf->line);
-		// 		exit(0);
-		// 	}
 			fdf->rows++;
 			free(fdf->line);
 			fdf->line = get_next_line(fdf->fd);
