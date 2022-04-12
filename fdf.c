@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 00:06:36 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/12 02:44:01 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,23 @@
 int	main(int ac, char **av)
 {
 	t_fdf	fdf;
+	// int i = 0;
+	// int j;
 
 	if (ac < 2)
 		return (ft_putstr_fd("ERROR numbre of argument \n", 2));
 	get_map(&fdf, av);
+	// while (i <= fdf.rows)
+	// {
+	// 	j = 0;
+	// 	while (j <= fdf.clms)
+	// 	{
+	// 		printf("%d", fdf.map[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	i++;
+	// }
 	fdf.mlx = mlx_init();
 	fdf.win = mlx_new_window(fdf.mlx, 1920, 1080, "FDF");
 	fdf.img = mlx_new_image(fdf.mlx, 1920, 1080);

@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:05:15 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 00:11:04 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/12 01:48:43 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	pixel_put(t_fdf *fdf)
 	char	*dst;
 
 	if (fdf->xiso <= 1920 && fdf->yiso <= 1080
-		&& fdf->xiso0 >= 10 && fdf->yiso0 >= 10)
+		&& fdf->xiso0 >= 0 && fdf->yiso0 >= 0)
 	{
 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8));

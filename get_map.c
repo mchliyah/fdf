@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 00:14:12 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/12 02:35:46 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	get_colms(t_fdf *fdf, char **av)
 	{
 		fdf->map[fdf->i] = malloc(sizeof(int) * fdf->clms);
 		fdf->j = -1;
-		while (++fdf->j < fdf->clms)
+		while (++fdf->j < fdf->clms && colm[fdf->j])
 			fdf->map[fdf->i][fdf->j] = ft_atoi(colm[fdf->j]);
 		free(fdf->line);
 		to_free(colm);
@@ -65,25 +65,22 @@ void	get_rows(t_fdf *fdf, char **av)
 	close (fdf->fd);
 }
 
-// void	check_map(t_fdf *fdf)
-// {
-// 	int	i;
-// 	int	j;
-// 	i = 0;
-// 	while(i < fdf->rows)
-// 	{
-// 		j = 0;
-// 		while(fdf->map[i][j])
-// 			j++;
-// 		if (j != fdf->clms)
-// 		{
-// 			clear();
-// 			exit(0);
-// 		}
-// 		i++;
-// 		error\n;
-// 	}
-// }
+void	check_map(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < fdf->rows)
+	{
+		j = 0;
+		while (fdf->map[i][j])
+			j++;
+		if (j != fdf->clms)
+			map_exit(fdf);
+		i++;
+	}
+}
 
 int	**get_map(t_fdf *fdf, char **av)
 {

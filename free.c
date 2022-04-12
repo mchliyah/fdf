@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:13:46 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 00:14:38 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/12 01:29:57 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,17 @@ void	to_free(char **colm)
 	while (colm[++i])
 		free(colm[i]);
 	free(colm);
+}
+
+void	map_free(t_fdf *fdf)
+{
+	int	i;
+
+	i = 0;
+	while (i <= fdf->clms)
+	{
+		free(fdf->map[i]);
+		i++;
+	}
+	free(fdf->map);
 }
