@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:05:15 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 01:48:43 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/13 02:03:16 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,28 @@
 void	pixel_put(t_fdf *fdf)
 {
 	char	*dst;
+	int		colr;
 
-	if (fdf->xiso <= 1920 && fdf->yiso <= 1080
-		&& fdf->xiso0 >= 0 && fdf->yiso0 >= 0)
+	if (fdf->z != fdf->z0 || (fdf->z != 0 && fdf->z0 != 0))
+		colr = GREEN;
+	else
+		colr = WHITE;
+	if (fdf->xiso <= 1910 && fdf->yiso <= 1075
+		&& fdf->xiso0 >= 10 && fdf->yiso0 >= 10)
 	{
 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8));
-		*(unsigned int *)dst = RED;
+		*(unsigned int *)dst = colr;
 	}
 }
 
 void	get_iso(t_fdf *fdf)
 {
-	fdf->xiso = fdf->x - fdf->y;
-	fdf->yiso = ((fdf->x + fdf->y) / 2) - fdf->z * 2;
-	fdf->xiso0 = fdf->x0 - fdf->y0;
-	fdf->yiso0 = ((fdf->x0 + fdf->y0) / 2) - fdf->z0 * 2;
+	fdf->xiso = (fdf->x - fdf->y) / 2;
+	fdf->yiso = ((fdf->x + fdf->y) / 4) - fdf->z * 2;
+	fdf->xiso0 = (fdf->x0 - fdf->y0) / 2;
+	fdf->yiso0 = ((fdf->x0 + fdf->y0) / 4) - fdf->z0 * 2;
 }
-
-
 
 void	drwline(t_fdf *fdf)
 {
@@ -60,6 +63,25 @@ void	drwline(t_fdf *fdf)
 	}
 }
 
+void	cartesian_draw(t_fdf *fdf)
+{
+	if (fdf->i != fdf->rows - 1)
+	{
+		fdf->z = fdf->map[fdf->i + 1][fdf->j];
+		fdf->z0 = fdf->map[fdf->i][fdf->j];
+		fdf->y = fdf->y0 + 50;
+		drwline(fdf);
+	}
+	fdf->y = fdf->y0;
+	if (fdf->j != fdf->clms - 1)
+	{
+		fdf->z = fdf->map[fdf->i][fdf->j + 1];
+		fdf->z0 = fdf->map[fdf->i][fdf->j];
+		fdf->x = fdf->x0 + 50;
+		drwline(fdf);
+	}
+}
+
 void	render(t_fdf *fdf)
 {
 	fdf->i = 0;
@@ -69,22 +91,8 @@ void	render(t_fdf *fdf)
 		fdf->j = 0;
 		while (fdf->j < fdf->clms)
 		{
-			if (fdf->i != fdf->rows - 1)
-			{
-				fdf->z = fdf->map[fdf->i + 1][fdf->j];
-				fdf->z0 = fdf->map[fdf->i][fdf->j];
-				fdf->y = fdf->y0 + 20;
-				drwline(fdf);
-			}
-			fdf->y = fdf->y0;
-			if (fdf->j != fdf->clms - 1)
-			{
-				fdf->z = fdf->map[fdf->i][fdf->j + 1];
-				fdf->z0 = fdf->map[fdf->i][fdf->j];
-				fdf->x = fdf->x0 + 20;
-				drwline(fdf);
-			}
-			fdf->x0 = fdf->x0 + 20;
+			cartesian_draw(fdf);
+			fdf->x0 = fdf->x0 + 50;
 			fdf->j++;
 		}
 		fdf->i++;

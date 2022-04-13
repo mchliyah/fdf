@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 01:26:20 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/12 21:49:09 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define BLUE 0x000000FF
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
+# define WHITE 0xFFFFFF
 
 typedef struct s_fdf
 {

@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 02:35:46 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/13 02:04:17 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,45 +41,57 @@ void	get_colms(t_fdf *fdf, char **av)
 	close(fdf->fd);
 }
 
+void	check_map(t_fdf *fdf)
+{
+	char	**colm;
+	int		i;
+	int		j;
+
+	if (fdf->j == 0)
+	{
+		colm = ft_split(fdf->line, ' ');
+		i = 0;
+		while (colm[i++])
+			fdf->j++;
+		to_free(colm);
+	}
+	else
+	{
+		colm = ft_split(fdf->line, ' ');
+		j = 0;
+		i = 0;
+		while (colm[i++])
+			j++;
+		to_free(colm);
+		if (fdf->j != j)
+		{
+			free(fdf->line);
+		}
+	}
+}
+
 void	get_rows(t_fdf *fdf, char **av)
 {
-	size_t	len;
-
+	fdf->j = 0;
 	fdf->fd = open(av[1], O_RDONLY);
 	if (fdf->fd < 0)
-		err_exit("MAP ERROR");
+		err_exit("MAP ERROR\n");
 	fdf->rows = 0;
 	fdf->line = get_next_line(fdf->fd);
-	len = ft_strlen(fdf->line);
 	if (!fdf->line)
-		err_exit("MAP ERROR");
+		err_exit("MAP ERROR\n");
 	else
 	{
 		while (fdf->line)
 		{
+			check_map(fdf);
 			fdf->rows++;
 			free(fdf->line);
 			fdf->line = get_next_line(fdf->fd);
 		}
 	}
 	close (fdf->fd);
-}
-
-void	check_map(t_fdf *fdf)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < fdf->rows)
-	{
-		j = 0;
-		while (fdf->map[i][j])
-			j++;
-		if (j != fdf->clms)
-			map_exit(fdf);
-		i++;
-	}
+	fdf->j = 0;
 }
 
 int	**get_map(t_fdf *fdf, char **av)
