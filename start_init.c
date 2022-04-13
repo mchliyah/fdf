@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:10:17 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 23:27:48 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/13 04:09:51 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	init(t_fdf *fdf)
 {
 	if (fdf->i == 0)
 	{
-		fdf->x0 = 600;
+		fdf->x0 = 800;
 		fdf->y0 = 0;
-		fdf->x = 600;
+		fdf->x = 800;
 		fdf->y = 0;
 	}
 	else
 	{
-		fdf->y0 = fdf->y0 + 50;
-		fdf->x0 = 600;
-		fdf->x = 600;
+		fdf->y0 = fdf->y0 + 11;
+		fdf->x0 = 800;
+		fdf->x = 800;
 	}
 }

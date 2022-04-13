@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:05:15 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/13 02:03:16 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/13 04:10:07 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	pixel_put(t_fdf *fdf)
 	char	*dst;
 	int		colr;
 
-	if (fdf->z != fdf->z0 || (fdf->z != 0 && fdf->z0 != 0))
+	if (fdf->z > 1 && fdf->z0 > 1)
 		colr = GREEN;
 	else
 		colr = WHITE;
@@ -69,7 +69,7 @@ void	cartesian_draw(t_fdf *fdf)
 	{
 		fdf->z = fdf->map[fdf->i + 1][fdf->j];
 		fdf->z0 = fdf->map[fdf->i][fdf->j];
-		fdf->y = fdf->y0 + 50;
+		fdf->y = fdf->y0 + 11;
 		drwline(fdf);
 	}
 	fdf->y = fdf->y0;
@@ -77,7 +77,7 @@ void	cartesian_draw(t_fdf *fdf)
 	{
 		fdf->z = fdf->map[fdf->i][fdf->j + 1];
 		fdf->z0 = fdf->map[fdf->i][fdf->j];
-		fdf->x = fdf->x0 + 50;
+		fdf->x = fdf->x0 + 11;
 		drwline(fdf);
 	}
 }
@@ -92,7 +92,7 @@ void	render(t_fdf *fdf)
 		while (fdf->j < fdf->clms)
 		{
 			cartesian_draw(fdf);
-			fdf->x0 = fdf->x0 + 50;
+			fdf->x0 = fdf->x0 + 11;
 			fdf->j++;
 		}
 		fdf->i++;
