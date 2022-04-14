@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/12 21:49:09 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/14 01:37:40 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	err_exit(char *err);
 void	init(t_fdf *fdf);
 void	render(t_fdf *fdf);
 void	to_free(char **colm);
-void	map_exit(t_fdf *fdf);
+void	map_exit(char *line, char **colm);
 void	map_free(t_fdf *fdf);
 
 #endif

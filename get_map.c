@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/13 02:04:17 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/14 01:39:32 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ void	get_colms(t_fdf *fdf, char **av)
 void	check_map(t_fdf *fdf)
 {
 	char	**colm;
-	int		i;
 	int		j;
 
+	fdf->i = 0;
 	if (fdf->j == 0)
 	{
 		colm = ft_split(fdf->line, ' ');
-		i = 0;
-		while (colm[i++])
+		if (colm[fdf->i] == '\0')
+			map_exit(fdf->line, colm);
+		while (colm[fdf->i++])
 			fdf->j++;
 		to_free(colm);
 	}
@@ -59,14 +60,11 @@ void	check_map(t_fdf *fdf)
 	{
 		colm = ft_split(fdf->line, ' ');
 		j = 0;
-		i = 0;
-		while (colm[i++])
+		while (colm[fdf->i++])
 			j++;
-		to_free(colm);
 		if (fdf->j != j)
-		{
-			free(fdf->line);
-		}
+			map_exit(fdf->line, colm);
+		to_free(colm);
 	}
 }
 
