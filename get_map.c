@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/14 01:39:32 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/14 02:25:12 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	get_colms(t_fdf *fdf, char **av)
 void	check_map(t_fdf *fdf)
 {
 	char	**colm;
-	int		j;
+	// int		j;
 
 	fdf->i = 0;
 	if (fdf->j == 0)
@@ -56,16 +56,16 @@ void	check_map(t_fdf *fdf)
 			fdf->j++;
 		to_free(colm);
 	}
-	else
-	{
-		colm = ft_split(fdf->line, ' ');
-		j = 0;
-		while (colm[fdf->i++])
-			j++;
-		if (fdf->j != j)
-			map_exit(fdf->line, colm);
-		to_free(colm);
-	}
+	// else
+	// {
+	// 	colm = ft_split(fdf->line, ' ');
+	// 	j = 0;
+	// 	while (colm[fdf->i++])
+	// 		j++;
+	// 	if (fdf->j != j)
+	// 		map_exit(fdf->line, colm);
+	// 	to_free(colm);
+	// }
 }
 
 void	get_rows(t_fdf *fdf, char **av)
