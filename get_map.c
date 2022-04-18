@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 08:06:52 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/18 11:35:11 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,13 @@ void	get_int_map(t_fdf *fdf, char **av)
 	while (line)
 	{
 		colm = ft_split(line, ' ', &fdf->clms);
-		fdf->map[fdf->i] = malloc(sizeof(int) * fdf->clms);
+		fdf->map[fdf->i] = malloc(sizeof(int) * (fdf->clms - 1));
 		fdf->j = -1;
-		while (++fdf->j < fdf->clms && colm[fdf->j])
+		while (++fdf->j < fdf->clms - 1 && colm[fdf->j])
 			fdf->map[fdf->i][fdf->j] = ft_atoi(colm[fdf->j]);
 		free(line);
 		to_free(colm);
 		line = get_next_line(fdf->fd);
-		colm = ft_split(line, ' ', &fdf->clms);
 		fdf->i++;
 	}
 	fdf->i = 0;
@@ -93,7 +92,7 @@ int	**get_map(t_fdf *fdf, char **av)
 	fdf->rows = 0;
 	fdf->clms = 0;
 	check_map(fdf, line, av);
-	fdf->map = malloc(sizeof(int **) * fdf->rows);
+	fdf->map = malloc(sizeof(int *) * fdf->rows);
 	if (!fdf->map)
 		err_exit("malloc");
 	get_int_map(fdf, av);

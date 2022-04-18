@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:05:15 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 08:13:06 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/18 11:44:21 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	pixel_put(t_fdf *fdf, int xlen, int ylen)
 	else
 		colr = WHITE;
 	if (fdf->xiso < xlen && fdf->yiso < ylen
-		&& fdf->xiso0 > 0 && fdf->yiso0 > 0)
+		&& fdf->xiso0 >= 0 && fdf->yiso0 >= 0)
 	{
 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8));
@@ -65,7 +65,7 @@ void	drwline(t_fdf *fdf, int xlen, int ylen)
 
 void	cartesian_draw(t_fdf *fdf, int scl, int xlen, int ylen)
 {
-	if (fdf->i != fdf->rows - 1)
+	if (fdf->i + 1 < fdf->rows)
 	{
 		fdf->z = fdf->map[fdf->i + 1][fdf->j];
 		fdf->z0 = fdf->map[fdf->i][fdf->j];
@@ -73,7 +73,7 @@ void	cartesian_draw(t_fdf *fdf, int scl, int xlen, int ylen)
 		drwline(fdf, xlen, ylen);
 	}
 	fdf->y = fdf->y0;
-	if (fdf->j != fdf->clms - 1)
+	if (fdf->j + 1 < fdf->clms)
 	{
 		fdf->z = fdf->map[fdf->i][fdf->j + 1];
 		fdf->z0 = fdf->map[fdf->i][fdf->j];
@@ -82,26 +82,36 @@ void	cartesian_draw(t_fdf *fdf, int scl, int xlen, int ylen)
 	}
 }
 
+int	scaling(int clms)
+{
+	if (clms <= 20)
+		return (20);
+	else if (clms >= 20 && clms <= 50)
+		return (15);
+	else if (clms >= 50 && clms <= 100)
+		return (10);
+	else if (clms >= 100 && clms <= 200)
+		return (5);
+	return (2);
+}
+
 void	render(t_fdf *fdf, int xlen, int ylen)
 {
-	// int	xscl;
 	int	scl;
 
-	// xscl = (xlen / fdf->clms) - 20;
-	scl = (ylen / fdf->rows) - 20;
-
+	scl = scaling(fdf->clms);
 	fdf->i = 0;
-	init(fdf, xlen, ylen);
+	init(fdf, scl, xlen);
 	while (fdf->i < fdf->rows)
 	{
 		fdf->j = 0;
-		while (fdf->j < fdf->clms)
+		while (fdf->j < fdf->clms )
 		{
 			cartesian_draw(fdf, scl, xlen, ylen);
 			fdf->x0 = fdf->x0 + scl;
 			fdf->j++;
 		}
 		fdf->i++;
-		init(fdf, xlen, ylen);
+		init(fdf, scl, xlen);
 	}
 }

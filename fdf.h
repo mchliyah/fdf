@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 08:01:53 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/18 09:09:39 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_fdf
 
 int		**get_map(t_fdf *fdf, char **av);
 void	err_exit(char *err);
-void	init(t_fdf *fdf, int xlen, int ylen);
+void	init(t_fdf *fdf, int scl, int xlen);
 void	render(t_fdf *fdf, int xlen, int ylen);
 void	to_free(char **colm);
 void	map_exit(char *line, char **colm);

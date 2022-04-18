@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 08:15:07 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/18 09:10:08 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av)
 	fdf.img = mlx_new_image(fdf.mlx, xlen, ylen);
 	fdf.img_adrs = mlx_get_data_addr(fdf.img, &fdf.bpp, &fdf.len, &fdf.endian);
 	fdf.ofset = (fdf.y * fdf.len + fdf.x * (fdf.bpp / 8));
-	init(&fdf, xlen, ylen);
+	init(&fdf, 0, xlen);
 	render(&fdf, xlen, ylen);
 	mlx_put_image_to_window(fdf.mlx, fdf.win, fdf.img, 0, 0);
 	mlx_loop(fdf.mlx);
