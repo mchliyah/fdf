@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 14:47:02 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/03/31 22:27:48 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/18 06:31:48 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# define BUFFER_SIZE 100
 //FONCTIONS
 char	*get_next_line(int fd);
 char	*ft_strdup1(const char *src);

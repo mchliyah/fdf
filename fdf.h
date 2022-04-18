@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/14 01:37:40 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/18 08:01:53 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_fdf
 	void	*win;
 	void	*img;
 	char	*img_adrs;
-	char	*line;
 	int		rows;
 	int		clms;
 	int		fd;
@@ -60,14 +59,19 @@ typedef struct s_fdf
 	float	yiso;
 	float	xiso0;
 	float	yiso0;
+	int		xlen;
+	int		ylen;
+	int		xscl;
+	int		yscl;
 }	t_fdf;
 
 int		**get_map(t_fdf *fdf, char **av);
 void	err_exit(char *err);
-void	init(t_fdf *fdf);
-void	render(t_fdf *fdf);
+void	init(t_fdf *fdf, int xlen, int ylen);
+void	render(t_fdf *fdf, int xlen, int ylen);
 void	to_free(char **colm);
 void	map_exit(char *line, char **colm);
+int		ft_count_words_sep(char const *s, char c);
 void	map_free(t_fdf *fdf);
 
 #endif

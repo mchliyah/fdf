@@ -6,34 +6,78 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/14 02:25:12 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/18 08:06:52 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"fdf.h"
 
-void	get_colms(t_fdf *fdf, char **av)
+
+int	ft_count_words_sep(char const *line, char c)
+{
+	int	words;
+	int	spc;
+
+	spc = 0;
+	words = 0;
+	while (*line != '\0' && *line != '\n')
+	{
+		if (spc == 1 && *line == c && *line != '\0' && *line != '\n')
+			spc = 0;
+		if (spc == 0 && *line != c && *line != '\0' && *line != '\n')
+		{
+			spc = 1;
+			words++;
+		}
+		line++;
+	}
+	return (words);
+}
+
+void	check_map(t_fdf *fdf, char *line, char **av)
+{
+	int		fd;
+
+	fd = (open(av[1], O_RDONLY));
+	if (fd == -1)
+		err_exit("map error\n");
+	line = get_next_line(fd);
+	if (!line)
+		err_exit("N0 data found");
+	fdf->rows++;
+	fdf->clms = ft_count_words_sep(line, ' ');
+	while (line)
+	{
+		if (fdf->clms != ft_count_words_sep(line, ' '))
+			err_exit("Found wrong line length. Exiting.");
+		free(line);
+		line = get_next_line(fd);
+		if (line)
+			fdf->rows++;
+	}
+	if ((close(fd)) == -1)
+		err_exit ("map dosn't close");
+}
+
+void	get_int_map(t_fdf *fdf, char **av)
 {
 	char	**colm;
+	char	*line;
 
-	fdf->clms = 0;
-	fdf->i = -1;
 	fdf->fd = open(av[1], O_RDONLY);
-	fdf->line = get_next_line(fdf->fd);
-	colm = ft_split(fdf->line, ' ');
-	while (colm[++fdf->i])
-		fdf->clms++;
+	line = get_next_line(fdf->fd);
 	fdf->i = 0;
-	while (fdf->line)
+	while (line)
 	{
+		colm = ft_split(line, ' ', &fdf->clms);
 		fdf->map[fdf->i] = malloc(sizeof(int) * fdf->clms);
 		fdf->j = -1;
 		while (++fdf->j < fdf->clms && colm[fdf->j])
 			fdf->map[fdf->i][fdf->j] = ft_atoi(colm[fdf->j]);
-		free(fdf->line);
+		free(line);
 		to_free(colm);
-		fdf->line = get_next_line(fdf->fd);
-		colm = ft_split(fdf->line, ' ');
+		line = get_next_line(fdf->fd);
+		colm = ft_split(line, ' ', &fdf->clms);
 		fdf->i++;
 	}
 	fdf->i = 0;
@@ -41,63 +85,17 @@ void	get_colms(t_fdf *fdf, char **av)
 	close(fdf->fd);
 }
 
-void	check_map(t_fdf *fdf)
-{
-	char	**colm;
-	// int		j;
-
-	fdf->i = 0;
-	if (fdf->j == 0)
-	{
-		colm = ft_split(fdf->line, ' ');
-		if (colm[fdf->i] == '\0')
-			map_exit(fdf->line, colm);
-		while (colm[fdf->i++])
-			fdf->j++;
-		to_free(colm);
-	}
-	// else
-	// {
-	// 	colm = ft_split(fdf->line, ' ');
-	// 	j = 0;
-	// 	while (colm[fdf->i++])
-	// 		j++;
-	// 	if (fdf->j != j)
-	// 		map_exit(fdf->line, colm);
-	// 	to_free(colm);
-	// }
-}
-
-void	get_rows(t_fdf *fdf, char **av)
-{
-	fdf->j = 0;
-	fdf->fd = open(av[1], O_RDONLY);
-	if (fdf->fd < 0)
-		err_exit("MAP ERROR\n");
-	fdf->rows = 0;
-	fdf->line = get_next_line(fdf->fd);
-	if (!fdf->line)
-		err_exit("MAP ERROR\n");
-	else
-	{
-		while (fdf->line)
-		{
-			check_map(fdf);
-			fdf->rows++;
-			free(fdf->line);
-			fdf->line = get_next_line(fdf->fd);
-		}
-	}
-	close (fdf->fd);
-	fdf->j = 0;
-}
-
 int	**get_map(t_fdf *fdf, char **av)
 {
-	get_rows(fdf, av);
-	fdf->map = malloc(sizeof(int *) * fdf->rows);
+	char	*line;
+
+	line = "\0";
+	fdf->rows = 0;
+	fdf->clms = 0;
+	check_map(fdf, line, av);
+	fdf->map = malloc(sizeof(int **) * fdf->rows);
 	if (!fdf->map)
 		err_exit("malloc");
-	get_colms(fdf, av);
+	get_int_map(fdf, av);
 	return (fdf->map);
 }

@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 14:45:53 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/03/31 22:27:31 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/18 08:13:37 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*full_static(char	*storage, char *rest, int fd, int read_return)
 {
 	while (strsearch(storage, '\n') == -1)
 	{
-		read_return = read(fd, rest, 1);
+		read_return = read(fd, rest, BUFFER_SIZE);
 		if (read_return == 0 || read_return == -1)
 			break ;
 		rest[read_return] = '\0';
@@ -82,7 +82,7 @@ char	*get_next_line(int fd)
 	int			read_return;
 
 	read_return = 0;
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!storage)
 	{
@@ -90,7 +90,7 @@ char	*get_next_line(int fd)
 		if (!storage)
 			return (NULL);
 	}
-	rest = malloc(sizeof(char) * (2));
+	rest = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	storage = full_static(storage, rest, fd, read_return);
 	free (rest);
 	if (strsearch(storage, '\n') == -1)
