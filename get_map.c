@@ -6,12 +6,11 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 11:35:11 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/19 03:36:37 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"fdf.h"
-
 
 int	ft_count_words_sep(char const *line, char c)
 {
@@ -69,10 +68,10 @@ void	get_int_map(t_fdf *fdf, char **av)
 	fdf->i = 0;
 	while (line)
 	{
-		colm = ft_split(line, ' ', &fdf->clms);
-		fdf->map[fdf->i] = malloc(sizeof(int) * (fdf->clms - 1));
+		colm = ft_split(line, ' ');
+		fdf->map[fdf->i] = malloc(sizeof(int) * (fdf->clms));
 		fdf->j = -1;
-		while (++fdf->j < fdf->clms - 1 && colm[fdf->j])
+		while (++fdf->j < fdf->clms && colm[fdf->j])
 			fdf->map[fdf->i][fdf->j] = ft_atoi(colm[fdf->j]);
 		free(line);
 		to_free(colm);

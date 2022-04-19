@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:58:20 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/14 18:01:04 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/19 03:30:58 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	wloop(char const *s, char c, char **str)
 	str[str_loc] = NULL;
 }
 
-char	**ft_split(char const *s, char c, int *clmns)
+char	**ft_split(char const *s, char c)
 {
 	char	**str;
 	int		x;
@@ -84,7 +84,6 @@ char	**ft_split(char const *s, char c, int *clmns)
 	if (!s)
 		return (NULL);
 	x = (ft_contword(s, c) + 1);
-	(*clmns) = x;
 	str = (char **)malloc(x * sizeof (char *));
 	if (!str)
 		return (NULL);

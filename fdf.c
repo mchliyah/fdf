@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 09:10:08 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/19 03:42:30 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,18 @@ void	get_window(t_fdf *fdf)
 	else if (fdf->clms >= 100 && fdf->clms <= 200)
 		fdf->xlen = fdf->clms * 10;
 	else
-		fdf->xlen = fdf->clms * 5;
+		fdf->xlen = fdf->clms * 2.5;
 	if (fdf->rows <= 20)
-		fdf->ylen = fdf->rows * 80;
+		fdf->ylen = fdf->rows * 70;
 	else if (fdf->rows >= 20 && fdf->rows <= 50)
-		fdf->ylen = fdf->rows * 40;
+		fdf->ylen = fdf->rows * 35;
 	else if (fdf->rows >= 50 && fdf->rows <= 100)
-		fdf->ylen = fdf->rows * 20;
+		fdf->ylen = fdf->rows * 16;
 	else if (fdf->rows >= 100 && fdf->rows <= 200)
-		fdf->ylen = fdf->rows * 10;
+		fdf->ylen = fdf->rows * 7;
 	else
-		fdf->ylen = fdf->rows * 5;
+		fdf->ylen = fdf->rows * 2.5;
 }
-
 
 int	main(int ac, char **av)
 {

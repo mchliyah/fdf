@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:05:15 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 11:44:21 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/19 03:38:43 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,34 +65,41 @@ void	drwline(t_fdf *fdf, int xlen, int ylen)
 
 void	cartesian_draw(t_fdf *fdf, int scl, int xlen, int ylen)
 {
-	if (fdf->i + 1 < fdf->rows)
+	int	i;
+	int	j;
+
+	i = fdf->i;
+	j = fdf->j;
+	while (i + 1 < fdf->rows)
 	{
 		fdf->z = fdf->map[fdf->i + 1][fdf->j];
 		fdf->z0 = fdf->map[fdf->i][fdf->j];
 		fdf->y = fdf->y0 + scl;
 		drwline(fdf, xlen, ylen);
+		i++;
 	}
 	fdf->y = fdf->y0;
-	if (fdf->j + 1 < fdf->clms)
+	while (j + 2 < fdf->clms)
 	{
 		fdf->z = fdf->map[fdf->i][fdf->j + 1];
 		fdf->z0 = fdf->map[fdf->i][fdf->j];
 		fdf->x = fdf->x0 + scl;
 		drwline(fdf, xlen, ylen);
+		j++;
 	}
 }
 
 int	scaling(int clms)
 {
 	if (clms <= 20)
-		return (20);
+		return (40);
 	else if (clms >= 20 && clms <= 50)
-		return (15);
+		return (30);
 	else if (clms >= 50 && clms <= 100)
-		return (10);
+		return (20);
 	else if (clms >= 100 && clms <= 200)
-		return (5);
-	return (2);
+		return (10);
+	return (3);
 }
 
 void	render(t_fdf *fdf, int xlen, int ylen)
@@ -102,10 +109,11 @@ void	render(t_fdf *fdf, int xlen, int ylen)
 	scl = scaling(fdf->clms);
 	fdf->i = 0;
 	init(fdf, scl, xlen);
+	// printf("fdf clms  %d\n", fdf->clms);
 	while (fdf->i < fdf->rows)
 	{
 		fdf->j = 0;
-		while (fdf->j < fdf->clms )
+		while (fdf->j + 1 < fdf->clms)
 		{
 			cartesian_draw(fdf, scl, xlen, ylen);
 			fdf->x0 = fdf->x0 + scl;
