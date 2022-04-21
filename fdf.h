@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/24 00:55:21 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 09:09:39 by mchliyah         ###   ########.fr       */
+/*   Created: 2022/04/21 10:24:47 by mchliyah          #+#    #+#             */
+/*   Updated: 2022/04/21 10:33:53 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 # include "get_next_line.h"
 # include "./libft/libft.h"
 
-# define BLUE 0x000000FF
-# define RED 0x00FF0000
-# define GREEN 0x0000FF00
-# define WHITE 0xFFFFFF
+# define COLOR 		0x00FFFFFF
+# define DISCO		0x9A1F6A
+# define BRICK_RED	0xC2294E
+# define FLAMINGO	0xEC4B27
+# define JAFFA		0xEF8633
+# define SAFFRON	0xF3AF3D
 
 typedef struct s_fdf
 {
@@ -67,11 +69,13 @@ typedef struct s_fdf
 
 int		**get_map(t_fdf *fdf, char **av);
 void	err_exit(char *err);
-void	init(t_fdf *fdf, int scl, int xlen);
-void	render(t_fdf *fdf, int xlen, int ylen);
+void	init(t_fdf *fdf, int scl);
+void	render(t_fdf *fdf);
 void	to_free(char **colm);
 void	map_exit(char *line, char **colm);
 int		ft_count_words_sep(char const *s, char c);
 void	map_free(t_fdf *fdf);
+int		scaling(int clms);
+void	get_window(t_fdf *fdf);
 
 #endif

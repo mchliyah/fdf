@@ -6,44 +6,62 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:05:15 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/19 03:38:43 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/21 10:37:39 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	pixel_put(t_fdf *fdf, int xlen, int ylen)
+// void	pixel_put(t_fdf *fdf)
+// {
+// 	char	*dst;
+
+// 	if (fdf->xiso < fdf->xlen && fdf->yiso < fdf->ylen
+// 		&& fdf->xiso0 >= 0 && fdf->yiso0 >= 0)
+// 	{
+// 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
+// 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8));
+// 		*(unsigned int *)dst = RED;
+// 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
+// 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8) + 1);
+// 		*(unsigned int *)dst = GREEN;
+// 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
+// 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8) + 2);
+// 		*(unsigned int *)dst = BLUE;
+// 	}
+// }
+
+void	pixel_put(t_fdf *fdf)
 {
 	char	*dst;
-	int		colr;
 
-	if (fdf->z > 1 && fdf->z0 > 1)
-		colr = GREEN;
-	else
-		colr = WHITE;
-	if (fdf->xiso < xlen && fdf->yiso < ylen
+	if (fdf->xiso < fdf->xlen && fdf->yiso < fdf->ylen
 		&& fdf->xiso0 >= 0 && fdf->yiso0 >= 0)
 	{
 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8));
-		*(unsigned int *)dst = colr;
+		*(unsigned int *)dst = COLOR;
 	}
 }
 
-void	get_iso(t_fdf *fdf)
-{
-	fdf->xiso = (fdf->x - fdf->y) / 2;
-	fdf->yiso = ((fdf->x + fdf->y) / 4) - fdf->z * 2;
-	fdf->xiso0 = (fdf->x0 - fdf->y0) / 2;
-	fdf->yiso0 = ((fdf->x0 + fdf->y0) / 4) - fdf->z0 * 2;
-}
+// int	get_colr(t_fdf *fdf)
+// {
+// 	int	t;
+// 	int	r;
+// 	int	g;
+// 	int	b;
 
-void	drwline(t_fdf *fdf, int xlen, int ylen)
+// }
+
+void	drwline(t_fdf *fdf)
 {
 	int	k;
 
 	k = 0;
-	get_iso(fdf);
+	fdf->xiso = (fdf->x - fdf->y) / 2;
+	fdf->yiso = ((fdf->x + fdf->y) / 4) - fdf->z * 3;
+	fdf->xiso0 = (fdf->x0 - fdf->y0) / 2;
+	fdf->yiso0 = ((fdf->x0 + fdf->y0) / 4) - fdf->z0 * 3;
 	fdf->dx = fdf->xiso - fdf->xiso0;
 	fdf->dy = fdf->yiso - fdf->yiso0;
 	if (abs(fdf->dx) > abs(fdf->dy))
@@ -56,14 +74,15 @@ void	drwline(t_fdf *fdf, int xlen, int ylen)
 	fdf->yiso = fdf->yiso0;
 	while (k <= fdf->stp)
 	{
-		pixel_put(fdf, xlen, ylen);
+		//get_color(curent, start, end, deltax, deltay);
+		pixel_put(fdf);
 		fdf->xiso += fdf->xinc;
 		fdf->yiso += fdf->yinc;
 		k++;
 	}
 }
 
-void	cartesian_draw(t_fdf *fdf, int scl, int xlen, int ylen)
+void	cartesian_draw(t_fdf *fdf, int scl)
 {
 	int	i;
 	int	j;
@@ -75,7 +94,7 @@ void	cartesian_draw(t_fdf *fdf, int scl, int xlen, int ylen)
 		fdf->z = fdf->map[fdf->i + 1][fdf->j];
 		fdf->z0 = fdf->map[fdf->i][fdf->j];
 		fdf->y = fdf->y0 + scl;
-		drwline(fdf, xlen, ylen);
+		drwline(fdf);
 		i++;
 	}
 	fdf->y = fdf->y0;
@@ -84,42 +103,28 @@ void	cartesian_draw(t_fdf *fdf, int scl, int xlen, int ylen)
 		fdf->z = fdf->map[fdf->i][fdf->j + 1];
 		fdf->z0 = fdf->map[fdf->i][fdf->j];
 		fdf->x = fdf->x0 + scl;
-		drwline(fdf, xlen, ylen);
+		drwline(fdf);
 		j++;
 	}
 }
 
-int	scaling(int clms)
-{
-	if (clms <= 20)
-		return (40);
-	else if (clms >= 20 && clms <= 50)
-		return (30);
-	else if (clms >= 50 && clms <= 100)
-		return (20);
-	else if (clms >= 100 && clms <= 200)
-		return (10);
-	return (3);
-}
-
-void	render(t_fdf *fdf, int xlen, int ylen)
+void	render(t_fdf *fdf)
 {
 	int	scl;
 
 	scl = scaling(fdf->clms);
 	fdf->i = 0;
-	init(fdf, scl, xlen);
-	// printf("fdf clms  %d\n", fdf->clms);
+	init(fdf, scl);
 	while (fdf->i < fdf->rows)
 	{
 		fdf->j = 0;
 		while (fdf->j + 1 < fdf->clms)
 		{
-			cartesian_draw(fdf, scl, xlen, ylen);
+			cartesian_draw(fdf, scl);
 			fdf->x0 = fdf->x0 + scl;
 			fdf->j++;
 		}
 		fdf->i++;
-		init(fdf, scl, xlen);
+		init(fdf, scl);
 	}
 }
