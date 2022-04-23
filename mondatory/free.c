@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Error.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 14:40:42 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/14 01:40:09 by mchliyah         ###   ########.fr       */
+/*   Created: 2022/04/12 00:13:46 by mchliyah          #+#    #+#             */
+/*   Updated: 2022/04/23 05:43:24 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
-void	err_exit(char *err)
+void	to_free(char **colm)
 {
-	ft_putstr_fd(err, 2);
-	exit(0);
+	int	i;
+
+	i = -1;
+	while (colm[++i])
+		free(colm[i]);
+	free(colm);
 }
 
-void	map_exit(char *line, char **colm)
+void	map_free(t_fdf *fdf)
 {
-	free(line);
-	to_free(colm);
-	err_exit("MAP ERROR\n");
+	int	i;
+
+	i = 0;
+	while (i <= fdf->clms)
+	{
+		free(fdf->map[i]);
+		i++;
+	}
+	free(fdf->map);
 }

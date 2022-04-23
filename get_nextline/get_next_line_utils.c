@@ -6,11 +6,11 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:06:53 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 06:05:40 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/23 05:42:53 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 size_t	ft_strlen(const char *str)
 {

@@ -6,11 +6,11 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 14:45:53 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/18 08:13:37 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/23 05:43:10 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../include/get_next_line.h"
 
 int	strsearch(char *str, int c)
 {

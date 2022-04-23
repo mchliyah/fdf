@@ -6,11 +6,11 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:10:17 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/20 18:12:27 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/23 05:43:40 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
 void	init(t_fdf *fdf, int scl)
 {
@@ -57,13 +57,13 @@ void	get_window(t_fdf *fdf)
 	else
 		fdf->xlen = fdf->clms * 2.5;
 	if (fdf->rows <= 20)
-		fdf->ylen = fdf->rows * 70;
+		fdf->ylen = fdf->rows * 75;
 	else if (fdf->rows >= 20 && fdf->rows <= 50)
-		fdf->ylen = fdf->rows * 35;
+		fdf->ylen = fdf->rows * 40;
 	else if (fdf->rows >= 50 && fdf->rows <= 100)
-		fdf->ylen = fdf->rows * 16;
+		fdf->ylen = fdf->rows * 20;
 	else if (fdf->rows >= 100 && fdf->rows <= 200)
-		fdf->ylen = fdf->rows * 7;
+		fdf->ylen = fdf->rows * 10;
 	else
-		fdf->ylen = fdf->rows * 2.5;
+		fdf->ylen = fdf->rows * 3;
 }

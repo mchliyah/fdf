@@ -6,33 +6,27 @@
 #    By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 01:07:10 by mchliyah          #+#    #+#              #
-#    Updated: 2022/04/20 18:36:53 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/04/23 05:45:17 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
-#BONUS = 
+NAME = fdf 
 CC = gcc
 FLAGS =  -Wall -Werror -Wextra -c
 
 RM = rm -f
 
 FILES = \
-		start_init.c	\
-		fdf.c	\
-		get_map.c	\
-		./libft/ft_lstnew.c\
-		get_next_line.c	\
-		get_next_line_utils.c\
-		Error.c		\
-		render.c	\
-		free.c		\
+		./mondatory/start_init.c	\
+		./mondatory/fdf.c	\
+		./mondatory/get_map.c	\
+		./get_nextline/get_next_line.c	\
+		./get_nextline/get_next_line_utils.c\
+		./mondatory/Error.c		\
+		./mondatory/render.c	\
+		./mondatory/free.c		\
 
 OBJECTS = $(FILES:.c=.o)
-
-#FILES_bonus =	
-
-#OBJECTS_bonus = $(FILES_bonus:.c=.o)
 
 %.o: %.c
 	@$(CC) $(FLAGS) -c $^ -o $@
@@ -58,13 +52,6 @@ $(NAME) :  $(OBJECTS)
 	@$(CC) $(OBJECTS) $(ARLIB) -lmlx -framework OpenGL -framework AppKit -o $(NAME) #-fsanitize=address
 	@echo "$(C_GREEN)[FDF MANDATORY CREATED!]$(C_RES)"
 
-#bonus : $(BONUS)
-
-#$(BONUS) : $(OBJECTS_bonus)
-#	@$(ALLIBFT)
-#	@$(CC) $(FILES_bonus) -o $(BONUS)
-#	@echo "$(C_L_BLUE)[FDF BONUS CREATED!]$(C_RES)"
-
 clean : 
 	@$(CLEANLIBFT)
 	@$(RM) $(OBJECTS)
@@ -76,5 +63,3 @@ fclean : clean
 	@echo "$(C_RED)[FDF && EXECUTABLES DELETED!]$(C_RES)"
 
 re : fclean all
-
-#rebonus : fclean bonus

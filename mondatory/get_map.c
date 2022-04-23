@@ -6,11 +6,11 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:55:33 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/19 03:36:37 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/23 05:43:30 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"fdf.h"
+#include"../include/fdf.h"
 
 int	ft_count_words_sep(char const *line, char c)
 {
@@ -58,6 +58,26 @@ void	check_map(t_fdf *fdf, char *line, char **av)
 		err_exit ("map dosn't close");
 }
 
+void	get_z_max(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	fdf->zmax = 0;
+	while (i < fdf->rows)
+	{
+		j = 0;
+		while (j < fdf->clms)
+		{
+			if (fdf->map[i][j] > fdf->zmax)
+				fdf->zmax = fdf->map[i][j];
+			j++;
+		}
+		i++;
+	}
+}
+
 void	get_int_map(t_fdf *fdf, char **av)
 {
 	char	**colm;
@@ -66,6 +86,7 @@ void	get_int_map(t_fdf *fdf, char **av)
 	fdf->fd = open(av[1], O_RDONLY);
 	line = get_next_line(fdf->fd);
 	fdf->i = 0;
+	fdf->zmax = 0;
 	while (line)
 	{
 		colm = ft_split(line, ' ');
@@ -78,6 +99,7 @@ void	get_int_map(t_fdf *fdf, char **av)
 		line = get_next_line(fdf->fd);
 		fdf->i++;
 	}
+	get_z_max(fdf);
 	fdf->i = 0;
 	fdf->j = 0;
 	close(fdf->fd);

@@ -6,7 +6,7 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:24:47 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/21 10:33:53 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/23 05:42:22 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,11 @@
 # include <mlx.h>
 # include <math.h>
 # include "get_next_line.h"
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 
-# define COLOR 		0x00FFFFFF
-# define DISCO		0x9A1F6A
-# define BRICK_RED	0xC2294E
-# define FLAMINGO	0xEC4B27
-# define JAFFA		0xEF8633
-# define SAFFRON	0xF3AF3D
+# define RED	255
+# define GREEN	255
+# define BLUE	255
 
 typedef struct s_fdf
 {
@@ -55,6 +52,7 @@ typedef struct s_fdf
 	int		stp;
 	int		z;
 	int		z0;
+	int		zmax;
 	int		i;
 	int		j;
 	float	xiso;

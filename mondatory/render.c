@@ -6,32 +6,13 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 00:05:15 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/21 10:37:39 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/23 05:43:36 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
 
-// void	pixel_put(t_fdf *fdf)
-// {
-// 	char	*dst;
-
-// 	if (fdf->xiso < fdf->xlen && fdf->yiso < fdf->ylen
-// 		&& fdf->xiso0 >= 0 && fdf->yiso0 >= 0)
-// 	{
-// 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
-// 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8));
-// 		*(unsigned int *)dst = RED;
-// 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
-// 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8) + 1);
-// 		*(unsigned int *)dst = GREEN;
-// 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
-// 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8) + 2);
-// 		*(unsigned int *)dst = BLUE;
-// 	}
-// }
-
-void	pixel_put(t_fdf *fdf)
+void	pixel_put(t_fdf *fdf, int colr)
 {
 	char	*dst;
 
@@ -40,18 +21,16 @@ void	pixel_put(t_fdf *fdf)
 	{
 		dst = fdf->img_adrs + ((int)round(fdf->yiso)
 				* fdf->len + (int)round(fdf->xiso) * (fdf->bpp / 8));
-		*(unsigned int *)dst = COLOR;
+		*(unsigned int *)dst = colr;
 	}
 }
 
-// int	get_colr(t_fdf *fdf)
-// {
-// 	int	t;
-// 	int	r;
-// 	int	g;
-// 	int	b;
-
-// }
+int	get_colr(t_fdf *fdf)
+{
+	if (fdf->z == fdf->z0 && fdf->z0 != fdf->zmax)
+		return (0 << 24 | RED << 16 | 150 << 8 | 150);
+	return (0 << 24 | RED << 16 | GREEN << 8 | BLUE);
+}
 
 void	drwline(t_fdf *fdf)
 {
@@ -59,9 +38,9 @@ void	drwline(t_fdf *fdf)
 
 	k = 0;
 	fdf->xiso = (fdf->x - fdf->y) / 2;
-	fdf->yiso = ((fdf->x + fdf->y) / 4) - fdf->z * 3;
+	fdf->yiso = ((fdf->x + fdf->y) / 4) - fdf->z * 4;
 	fdf->xiso0 = (fdf->x0 - fdf->y0) / 2;
-	fdf->yiso0 = ((fdf->x0 + fdf->y0) / 4) - fdf->z0 * 3;
+	fdf->yiso0 = ((fdf->x0 + fdf->y0) / 4) - fdf->z0 * 4;
 	fdf->dx = fdf->xiso - fdf->xiso0;
 	fdf->dy = fdf->yiso - fdf->yiso0;
 	if (abs(fdf->dx) > abs(fdf->dy))
@@ -74,8 +53,7 @@ void	drwline(t_fdf *fdf)
 	fdf->yiso = fdf->yiso0;
 	while (k <= fdf->stp)
 	{
-		//get_color(curent, start, end, deltax, deltay);
-		pixel_put(fdf);
+		pixel_put(fdf, get_colr(fdf));
 		fdf->xiso += fdf->xinc;
 		fdf->yiso += fdf->yinc;
 		k++;

@@ -6,11 +6,18 @@
 /*   By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 00:59:39 by mchliyah          #+#    #+#             */
-/*   Updated: 2022/04/20 18:12:14 by mchliyah         ###   ########.fr       */
+/*   Updated: 2022/04/23 05:43:21 by mchliyah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../include/fdf.h"
+
+int	key_press(int key)
+{
+	if (key == 53)
+		exit(0);
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
@@ -28,5 +35,6 @@ int	main(int ac, char **av)
 	init(&fdf, 0);
 	render(&fdf);
 	mlx_put_image_to_window(fdf.mlx, fdf.win, fdf.img, 0, 0);
+	mlx_hook(fdf.win, 2, 0, key_press, &fdf);
 	mlx_loop(fdf.mlx);
 }
