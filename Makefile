@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mchliyah <mchliyah@student.42.fr>          +#+  +:+       +#+         #
+#    By: mchliyah <mchliyah@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/24 01:07:10 by mchliyah          #+#    #+#              #
-#    Updated: 2022/04/23 05:45:17 by mchliyah         ###   ########.fr        #
+#    Updated: 2022/12/13 17:29:00 by mchliyah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,14 @@ FLAGS =  -Wall -Werror -Wextra -c
 RM = rm -f
 
 FILES = \
-		./mondatory/start_init.c	\
-		./mondatory/fdf.c	\
-		./mondatory/get_map.c	\
+		./mandatory/start_init.c	\
+		./mandatory/fdf.c	\
+		./mandatory/get_map.c	\
 		./get_nextline/get_next_line.c	\
 		./get_nextline/get_next_line_utils.c\
-		./mondatory/Error.c		\
-		./mondatory/render.c	\
-		./mondatory/free.c		\
+		./mandatory/Error.c		\
+		./mandatory/render.c	\
+		./mandatory/free.c		\
 
 OBJECTS = $(FILES:.c=.o)
 
